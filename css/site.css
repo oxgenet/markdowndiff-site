@@ -61,8 +61,9 @@ h1, h2, h3, h4 { line-height: 1.15; letter-spacing: -0.025em; }
 .nav-links a { color: var(--muted); font-size: 14.5px; font-weight: 500; }
 .nav-links a:hover { color: var(--text); text-decoration: none; }
 .nav-gh { color: var(--text) !important; }
-.theme-toggle { border: 1px solid var(--border); background: var(--surface); height: 36px; width: 36px; border-radius: 10px; cursor: pointer; font-size: 15px; }
-.theme-toggle:hover { background: var(--bg-2); }
+.pillbtn { border: 1px solid var(--border); background: var(--surface); height: 36px; min-width: 36px; padding: 0 12px; border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text); margin-left: 8px; }
+.pillbtn:hover { background: var(--bg-2); }
+.nav-links { margin-left: auto; }
 @media (max-width: 720px) { .nav-links a:not(.nav-gh) { display: none; } }
 
 /* Layout helpers */
@@ -156,6 +157,15 @@ mark.wd-del { background: var(--del-word); color: inherit; border-radius: 4px; p
 .pline.c-theirs { background: var(--add-bg); color: var(--add-fg); }
 .pline.c-base { color: var(--base-fg); }
 .pline.c-conflict { background: var(--conflict-bg); color: var(--conflict); }
+
+/* Rich markdown: tables + mermaid */
+.rich { padding-top: 40px; padding-bottom: 20px; }
+.rich-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; max-width: 980px; margin: 0 auto; }
+.rich-card { margin: 0; }
+@media (max-width: 880px) { .rich-grid { grid-template-columns: 1fr; } }
+.mermaid-body { display: flex; align-items: center; justify-content: center; min-height: 230px; padding: 18px; }
+.mermaid { margin: 0; font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: pre; overflow-x: auto; width: 100%; text-align: center; }
+.mermaid svg { max-width: 100%; height: auto; }
 
 /* Formats */
 .formats { padding-top: 40px; padding-bottom: 60px; }

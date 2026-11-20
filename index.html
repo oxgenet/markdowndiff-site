@@ -13,7 +13,6 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://md.oxge.net/" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://github.com" />
     <link rel="stylesheet" href="css/site.css" />
   </head>
   <body>
@@ -28,13 +27,14 @@
         <span>markdown<b>diff</b></span>
       </a>
       <nav class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#merge">Merge</a>
-        <a href="#formats">Formats</a>
-        <a href="#get">Get it</a>
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#merge" data-i18n="nav.merge">Merge</a>
+        <a href="#formats" data-i18n="nav.formats">Formats</a>
+        <a href="#get" data-i18n="nav.get">Get it</a>
         <a class="nav-gh" href="https://github.com/oxgenet/MarkdownDiff" target="_blank" rel="noopener">GitHub ↗</a>
       </nav>
-      <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+      <button class="pillbtn" id="lang-toggle" title="Language / 言語">日本語</button>
+      <button class="pillbtn" id="theme-toggle" title="Theme" aria-label="Toggle theme">
         <span id="theme-icon">🌓</span>
       </button>
     </header>
@@ -43,22 +43,21 @@
       <!-- HERO -->
       <section class="hero">
         <div class="hero-copy" data-reveal>
-          <p class="eyebrow">/* diff &amp; merge any document */</p>
-          <h1>See what <span class="grad">actually changed.</span></h1>
-          <p class="lede">
+          <p class="eyebrow" data-i18n="hero.eyebrow">/* diff &amp; merge any document */</p>
+          <h1 data-i18n="hero.h1">See what <span class="grad">actually changed.</span></h1>
+          <p class="lede" data-i18n="hero.lede">
             MarkdownDiff compares and merges Word, ODT, HTML, LaTeX, EPUB — any
             format <a href="https://pandoc.org" target="_blank" rel="noopener">pandoc</a>
             reads — by normalizing each one to clean Markdown. No binary noise, no
             format drama. Just the words that changed.
           </p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="#get">Get started</a>
-            <a class="btn btn-ghost" href="https://github.com/oxgenet/MarkdownDiff" target="_blank" rel="noopener">View source</a>
+            <a class="btn btn-primary" href="#get" data-i18n="hero.cta1">Get started</a>
+            <a class="btn btn-ghost" href="https://github.com/oxgenet/MarkdownDiff" target="_blank" rel="noopener" data-i18n="hero.cta2">View source</a>
           </div>
           <code class="install">$ npm i -g markdowndiff</code>
         </div>
 
-        <!-- Animated diff demo (the "video") -->
         <div class="hero-demo" data-reveal>
           <div class="window">
             <div class="win-bar">
@@ -67,7 +66,7 @@
             </div>
             <div class="win-body diff" id="hero-diff" aria-hidden="true"></div>
           </div>
-          <div class="demo-caption">live · unified view · word-level highlights</div>
+          <div class="demo-caption" data-i18n="hero.caption">live · unified view · word-level highlights</div>
         </div>
       </section>
 
@@ -80,19 +79,19 @@
       <section id="features" class="features">
         <div class="feature" data-reveal>
           <div class="feature-text">
-            <p class="eyebrow">/* semantic, not binary */</p>
-            <h2>Diffs of meaning, not markup.</h2>
-            <p>
+            <p class="eyebrow" data-i18n="feat1.eyebrow">/* semantic, not binary */</p>
+            <h2 data-i18n="feat1.h2">Diffs of meaning, not markup.</h2>
+            <p data-i18n="feat1.p">
               Two <code>.docx</code> files are just zipped XML — <code>git diff</code>
               shows you nothing useful. MarkdownDiff converts both to normalized
               Markdown first, so you see the sentence that changed, the clause that
               moved, the number that got edited. Even across <em>different</em> formats.
             </p>
             <ul class="ticks">
-              <li>Unified &amp; side-by-side views</li>
-              <li>Word-level highlighting</li>
-              <li>Ignores cosmetic typography (smart quotes, wrapping)</li>
-              <li><code>diff</code>-style exit codes for CI</li>
+              <li data-i18n="feat1.t1">Unified &amp; side-by-side views</li>
+              <li data-i18n="feat1.t2">Word-level highlighting</li>
+              <li data-i18n="feat1.t3">Ignores cosmetic typography (smart quotes, wrapping)</li>
+              <li data-i18n="feat1.t4"><code>diff</code>-style exit codes for CI</li>
             </ul>
           </div>
           <div class="feature-visual">
@@ -113,9 +112,9 @@
 
         <div class="feature reverse" data-reveal>
           <div class="feature-text">
-            <p class="eyebrow">/* light or dark, your call */</p>
-            <h2>Beautiful in any theme.</h2>
-            <p>
+            <p class="eyebrow" data-i18n="feat2.eyebrow">/* light or dark, your call */</p>
+            <h2 data-i18n="feat2.h2">Beautiful in any theme.</h2>
+            <p data-i18n="feat2.p">
               A local web GUI with drag-and-drop, and a CLI that themes itself to your
               terminal. Light, dark, high-contrast — every color editable down to the
               hex, from a config file or a <code>--theme-file</code>.
@@ -127,8 +126,8 @@
             </div>
           </div>
           <div class="feature-visual shots">
-            <figure class="shot"><img src="assets/app-light.png" alt="MarkdownDiff GUI, light theme" loading="lazy" /><figcaption>Light</figcaption></figure>
-            <figure class="shot shot-dark"><img src="assets/app-dark.png" alt="MarkdownDiff GUI, dark theme" loading="lazy" /><figcaption>Dark</figcaption></figure>
+            <figure class="shot"><img src="assets/app-light.png" alt="MarkdownDiff GUI, light theme" loading="lazy" /><figcaption data-i18n="shot.light">Light</figcaption></figure>
+            <figure class="shot shot-dark"><img src="assets/app-dark.png" alt="MarkdownDiff GUI, dark theme" loading="lazy" /><figcaption data-i18n="shot.dark">Dark</figcaption></figure>
           </div>
         </div>
       </section>
@@ -136,9 +135,9 @@
       <!-- MERGE -->
       <section id="merge" class="merge-sec" data-reveal>
         <div class="section-head">
-          <p class="eyebrow">/* three-way merge */</p>
-          <h2>Reconcile two people's edits.</h2>
-          <p class="sub">Give it a common ancestor and two versions. Non-overlapping
+          <p class="eyebrow" data-i18n="merge.eyebrow">/* three-way merge */</p>
+          <h2 data-i18n="merge.h2">Reconcile two people's edits.</h2>
+          <p class="sub" data-i18n="merge.sub">Give it a common ancestor and two versions. Non-overlapping
             changes merge themselves; real conflicts are shown side by side.</p>
         </div>
         <div class="window wide">
@@ -148,12 +147,55 @@
         </div>
       </section>
 
+      <!-- RICH MARKDOWN: tables + mermaid -->
+      <section id="rich" class="rich" data-reveal>
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="rich.eyebrow">/* more than plain text */</p>
+          <h2 data-i18n="rich.h2">Tables and diagrams, not just prose.</h2>
+          <p class="sub" data-i18n="rich.sub">It's Markdown all the way down. Structured tables diff
+            cell-by-cell, and because a Mermaid diagram is just text, MarkdownDiff
+            diffs your diagrams too.</p>
+        </div>
+        <div class="rich-grid">
+          <figure class="rich-card">
+            <div class="window">
+              <div class="win-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                <span class="win-title">pricing.md ⟷ pricing-2026.md</span></div>
+              <div class="win-body diff static-diff">
+                <div class="row ctx"><span class="tx">| Plan    | Price | Seats |</span></div>
+                <div class="row ctx"><span class="tx">|---------|-------|-------|</span></div>
+                <div class="row ctx"><span class="tx">| Starter | $0    | 1     |</span></div>
+                <div class="row del"><span class="tx">| Pro     | <mark class="wd-del">$12</mark>   | <mark class="wd-del">5</mark>     |</span></div>
+                <div class="row add"><span class="tx">| Pro     | <mark class="wd-add">$15</mark>   | <mark class="wd-add">10</mark>    |</span></div>
+                <div class="row ctx"><span class="tx">| Team    | $29   | 50    |</span></div>
+              </div>
+            </div>
+            <figcaption class="demo-caption" data-i18n="rich.cap1">markdown tables · diffed cell-by-cell</figcaption>
+          </figure>
+
+          <figure class="rich-card">
+            <div class="window">
+              <div class="win-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                <span class="win-title">architecture.md · mermaid</span></div>
+              <div class="win-body mermaid-body">
+                <pre class="mermaid" id="mermaid-fig">flowchart LR
+  A["docx / odt / html / rst / …"] --> P(["pandoc"])
+  P --> M["normalized Markdown"]
+  M --> D{"diff / merge"}
+  D --> O["readable diff"]</pre>
+              </div>
+            </div>
+            <figcaption class="demo-caption" data-i18n="rich.cap2">mermaid figures · diffable as source</figcaption>
+          </figure>
+        </div>
+      </section>
+
       <!-- FORMATS -->
       <section id="formats" class="formats" data-reveal>
         <div class="section-head">
-          <p class="eyebrow">/* everything pandoc reads */</p>
-          <h2>One tool. Every format.</h2>
-          <p class="sub">If pandoc can read it, MarkdownDiff can diff it.</p>
+          <p class="eyebrow" data-i18n="formats.eyebrow">/* everything pandoc reads */</p>
+          <h2 data-i18n="formats.h2">One tool. Every format.</h2>
+          <p class="sub" data-i18n="formats.sub">If pandoc can read it, MarkdownDiff can diff it.</p>
         </div>
         <div class="format-grid" id="format-grid"></div>
       </section>
@@ -161,13 +203,13 @@
       <!-- GET IT -->
       <section id="get" class="get" data-reveal>
         <div class="section-head">
-          <p class="eyebrow">/* two ways in */</p>
-          <h2>Install in one line.</h2>
-          <p class="sub">Needs <a href="https://pandoc.org/installing.html" target="_blank" rel="noopener">pandoc</a> and Node 18+.</p>
+          <p class="eyebrow" data-i18n="get.eyebrow">/* two ways in */</p>
+          <h2 data-i18n="get.h2">Install in one line.</h2>
+          <p class="sub" data-i18n="get.sub">Needs <a href="https://pandoc.org/installing.html" target="_blank" rel="noopener">pandoc</a> and Node 18+.</p>
         </div>
         <div class="get-grid">
           <div class="get-card">
-            <h3>⌨ terminal · CLI</h3>
+            <h3 data-i18n="get.card1">⌨ terminal · CLI</h3>
             <pre class="code"><span class="c-cmd">npm i -g markdowndiff</span>
 
 <span class="c-dim"># compare two documents</span>
@@ -180,7 +222,7 @@ markdowndiff <span class="c-flag">-s --theme light</span> a.md b.md
 markdowndiff <span class="c-flag">--base</span> orig.md mine.md yours.md</pre>
           </div>
           <div class="get-card">
-            <h3>🖥 browser · GUI</h3>
+            <h3 data-i18n="get.card2">🖥 browser · GUI</h3>
             <pre class="code"><span class="c-cmd">markdowndiff-gui</span>
 
 <span class="c-dim"># opens http://localhost:4173</span>
@@ -188,7 +230,7 @@ markdowndiff <span class="c-flag">--base</span> orig.md mine.md yours.md</pre>
 <span class="c-dim"># light / dark · copy &amp; download</span>
 <span class="c-dim"># 100% local — files never leave</span>
 <span class="c-dim"># your machine</span></pre>
-            <a class="btn btn-primary full" href="https://github.com/oxgenet/MarkdownDiff" target="_blank" rel="noopener">Read the docs →</a>
+            <a class="btn btn-primary full" href="https://github.com/oxgenet/MarkdownDiff" target="_blank" rel="noopener" data-i18n="get.docs">Read the docs →</a>
           </div>
         </div>
       </section>
@@ -199,39 +241,39 @@ markdowndiff <span class="c-flag">--base</span> orig.md mine.md yours.md</pre>
       <div class="foot-grid">
         <div class="foot-brand">
           <a class="wordmark" href="#top"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3"/><path d="M16 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M12 5v14" stroke-dasharray="2 2.5"/></svg><span>markdown<b>diff</b></span></a>
-          <p class="muted">Diff &amp; merge any document, as clean Markdown.</p>
-          <a class="bmc" href="#" id="bmc" target="_blank" rel="noopener" hidden><span>☕</span> Buy me a coffee</a>
+          <p class="muted" data-i18n="foot.tagline">Diff &amp; merge any document, as clean Markdown.</p>
+          <a class="bmc" href="#" id="bmc" target="_blank" rel="noopener" hidden><span>☕</span> <span data-i18n="foot.bmc">Buy me a coffee</span></a>
         </div>
         <div class="foot-col">
-          <h4>Product</h4>
-          <a href="#features">Features</a>
-          <a href="#merge">Three-way merge</a>
-          <a href="#formats">Formats</a>
-          <a href="#get">Install</a>
+          <h4 data-i18n="foot.product">Product</h4>
+          <a href="#features" data-i18n="nav.features">Features</a>
+          <a href="#merge" data-i18n="foot.merge">Three-way merge</a>
+          <a href="#formats" data-i18n="nav.formats">Formats</a>
+          <a href="#get" data-i18n="foot.install">Install</a>
         </div>
         <div class="foot-col">
-          <h4>Project</h4>
+          <h4 data-i18n="foot.project">Project</h4>
           <a href="https://github.com/oxgenet/MarkdownDiff" target="_blank" rel="noopener">GitHub</a>
           <a href="https://github.com/oxgenet/MarkdownDiff/issues" target="_blank" rel="noopener">Issues</a>
           <a href="https://github.com/oxgenet/MarkdownDiff#readme" target="_blank" rel="noopener">Docs</a>
         </div>
         <div class="foot-col">
-          <h4>Built on</h4>
+          <h4 data-i18n="foot.builton">Built on</h4>
           <a href="https://pandoc.org" target="_blank" rel="noopener">pandoc</a>
           <a href="https://nodejs.org" target="_blank" rel="noopener">Node.js</a>
         </div>
       </div>
       <div class="foot-base">
-        <span class="muted">© <span id="year"></span> MarkdownDiff · MIT licensed</span>
-        <span class="muted prov">provisional preview · <b>md.oxge.net</b></span>
+        <span class="muted"><span data-i18n="foot.rights">© <span id="year"></span> MarkdownDiff · MIT licensed</span></span>
+        <span class="muted prov" data-i18n="foot.prov">provisional preview · <b>md.oxge.net</b></span>
       </div>
     </footer>
 
-    <!-- Optional: set a Buy Me a Coffee URL to reveal the footer support button.
-         Mirrors the app's opt-in behaviour (hidden unless configured, HTTPS only). -->
+    <!-- Optional: set a Buy Me a Coffee URL to reveal the footer support button. -->
     <script>
       window.MDD_SUPPORT_URL = "https://www.buymeacoffee.com/opusify";
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
     <script src="js/site.js"></script>
   </body>
 </html>

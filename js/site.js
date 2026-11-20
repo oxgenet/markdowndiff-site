@@ -16,17 +16,102 @@
     html.classList.toggle('sys-dark', t === 'auto' && sysDark.matches);
     $('#theme-icon').textContent = { auto: '🌓', light: '☀️', dark: '🌙' }[t];
   }
-  sysDark.addEventListener('change', applyTheme);
+  sysDark.addEventListener('change', () => { applyTheme(); renderMermaid(); });
   $('#theme-toggle').addEventListener('click', () => {
     const order = ['auto', 'light', 'dark'];
     const cur = localStorage.getItem('mdd-theme') || 'auto';
     localStorage.setItem('mdd-theme', order[(order.indexOf(cur) + 1) % order.length]);
     applyTheme();
+    renderMermaid();
   });
   applyTheme();
 
-  // ---- misc content ------------------------------------------------------
-  $('#year').textContent = new Date().getFullYear();
+  // ---- i18n (EN / 日本語) -------------------------------------------------
+  const YEAR = new Date().getFullYear();
+  const yearEl = $('#year');
+  if (yearEl) yearEl.textContent = YEAR;
+
+  const JA = {
+    'nav.features': '機能', 'nav.merge': 'マージ', 'nav.formats': '対応形式', 'nav.get': '導入',
+    'hero.eyebrow': '/* あらゆる文書を差分・マージ */',
+    'hero.h1': '変更点が<span class="grad">ひと目で</span>わかる。',
+    'hero.lede': 'MarkdownDiff は Word・ODT・HTML・LaTeX・EPUB など <a href="https://pandoc.org" target="_blank" rel="noopener">pandoc</a> が読めるあらゆる形式を、きれいな Markdown に正規化して比較します。バイナリのノイズも形式の違いも気にせず、変わった言葉だけを表示します。',
+    'hero.cta1': 'はじめる', 'hero.cta2': 'ソースを見る',
+    'hero.caption': 'ライブ · 統合表示 · 単語単位のハイライト',
+    'feat1.eyebrow': '/* 構文ではなく意味の差分 */',
+    'feat1.h2': 'マークアップではなく、意味の差分。',
+    'feat1.p': '2 つの <code>.docx</code> は結局 zip 圧縮された XML。<code>git diff</code> では何もわかりません。MarkdownDiff は両方を正規化した Markdown に変換してから比較するので、変わった文・動いた節・編集された数字が見えます。<em>異なる</em>形式どうしでも。',
+    'feat1.t1': '統合表示と左右並列表示', 'feat1.t2': '単語単位のハイライト',
+    'feat1.t3': '体裁の違い（スマートクォート・改行）は無視',
+    'feat1.t4': 'CI 向けの <code>diff</code> 準拠の終了コード',
+    'feat2.eyebrow': '/* ライト or ダーク、お好みで */',
+    'feat2.h2': 'どんなテーマでも美しく。',
+    'feat2.p': 'ドラッグ＆ドロップのローカル Web GUI と、ターミナルに合わせて配色される CLI。ライト・ダーク・ハイコントラスト—すべての色を設定ファイルや <code>--theme-file</code> で自由に編集できます。',
+    'shot.light': 'ライト', 'shot.dark': 'ダーク',
+    'merge.eyebrow': '/* 3-way マージ */', 'merge.h2': '2 人の編集を統合する。',
+    'merge.sub': '共通の元ファイルと 2 つのバージョンを渡すだけ。重ならない変更は自動で統合し、本当の衝突だけを並べて表示します。',
+    'rich.eyebrow': '/* テキストだけじゃない */', 'rich.h2': '表も図も、文章だけじゃない。',
+    'rich.sub': 'どこまでも Markdown。表はセル単位で差分を取り、Mermaid 図もテキストなのでそのまま差分が取れます。',
+    'rich.cap1': 'マークダウンの表 · セル単位で差分', 'rich.cap2': 'Mermaid 図 · ソースとして差分可能',
+    'formats.eyebrow': '/* pandoc が読めるすべて */', 'formats.h2': 'ひとつのツールで、あらゆる形式。',
+    'formats.sub': 'pandoc が読めるなら、MarkdownDiff で差分が取れます。',
+    'get.eyebrow': '/* 2 つの入り口 */', 'get.h2': '1 行でインストール。',
+    'get.sub': '<a href="https://pandoc.org/installing.html" target="_blank" rel="noopener">pandoc</a> と Node 18+ が必要です。',
+    'get.card1': '⌨ ターミナル · CLI', 'get.card2': '🖥 ブラウザ · GUI', 'get.docs': 'ドキュメントを読む →',
+    'foot.tagline': 'あらゆる文書を、きれいな Markdown で差分・マージ。',
+    'foot.bmc': 'コーヒーをおごる', 'foot.product': 'プロダクト', 'foot.merge': '3-way マージ',
+    'foot.install': 'インストール', 'foot.project': 'プロジェクト', 'foot.builton': '技術スタック',
+    'foot.rights': '© ' + YEAR + ' MarkdownDiff · MIT ライセンス',
+    'foot.prov': '暫定プレビュー · <b>md.oxge.net</b>',
+  };
+  const i18nEls = $$('[data-i18n]');
+  const originals = new Map();
+  i18nEls.forEach((el) => originals.set(el, el.innerHTML));
+  function applyLang(lang) {
+    i18nEls.forEach((el) => {
+      const key = el.dataset.i18n;
+      el.innerHTML = lang === 'ja' && JA[key] != null ? JA[key] : originals.get(el);
+    });
+    html.lang = lang;
+    const btn = $('#lang-toggle');
+    if (btn) btn.textContent = lang === 'ja' ? 'EN' : '日本語';
+  }
+  const langParam = new URLSearchParams(location.search).get('lang');
+  if (['en', 'ja'].includes(langParam)) localStorage.setItem('mdd-lang', langParam);
+  const initialLang =
+    localStorage.getItem('mdd-lang') ||
+    ((navigator.language || '').toLowerCase().startsWith('ja') ? 'ja' : 'en');
+  $('#lang-toggle')?.addEventListener('click', () => {
+    const next = html.lang === 'ja' ? 'en' : 'ja';
+    localStorage.setItem('mdd-lang', next);
+    applyLang(next);
+  });
+  applyLang(initialLang);
+
+  // ---- mermaid figure ----------------------------------------------------
+  const mermaidEl = $('#mermaid-fig');
+  const mermaidSrc = mermaidEl ? mermaidEl.textContent : '';
+  function mdDark() {
+    return html.dataset.theme === 'dark' || (html.dataset.theme === 'auto' && sysDark.matches);
+  }
+  function renderMermaid() {
+    if (!mermaidEl || !window.mermaid) return;
+    try {
+      mermaidEl.removeAttribute('data-processed');
+      mermaidEl.innerHTML = mermaidSrc;
+      window.mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: 'strict',
+        theme: mdDark() ? 'dark' : 'default',
+        flowchart: { curve: 'basis' },
+      });
+      window.mermaid.run({ nodes: [mermaidEl] });
+    } catch (e) {
+      /* leave the source text visible as a graceful fallback */
+    }
+  }
+  if (window.mermaid) renderMermaid();
+  else window.addEventListener('load', renderMermaid);
 
   // Optional Buy Me a Coffee link (set window.MDD_SUPPORT_URL to enable).
   const support = window.MDD_SUPPORT_URL;
