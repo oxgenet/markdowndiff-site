@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MarkdownDiff — see what actually changed</title>
+    <meta
+      name="description"
+      content="Diff and 3-way merge documents in any pandoc-supported format — Word, ODT, HTML, LaTeX, EPUB, Markdown and more — as clean, readable Markdown. CLI and local web GUI."
+    />
+    <meta property="og:title" content="MarkdownDiff" />
+    <meta property="og:description" content="Diff & merge any document, as clean Markdown." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://md.oxge.net/" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://github.com" />
+    <link rel="stylesheet" href="css/site.css" />
+  </head>
+  <body>
+    <!-- NAV -->
+    <header class="nav" id="nav">
+      <a class="wordmark" href="#top" aria-label="MarkdownDiff home">
+        <svg class="mark" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3" />
+          <path d="M16 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3" />
+          <path d="M12 5v14" stroke-dasharray="2 2.5" />
+        </svg>
+        <span>markdown<b>diff</b></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#merge">Merge</a>
+        <a href="#formats">Formats</a>
+        <a href="#get">Get it</a>
+        <a class="nav-gh" href="https://github.com/oxgenet/MarkdownDiff" target="_blank" rel="noopener">GitHub ↗</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+        <span id="theme-icon">🌓</span>
+      </button>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-copy" data-reveal>
+          <p class="eyebrow">/* diff &amp; merge any document */</p>
+          <h1>See what <span class="grad">actually changed.</span></h1>
+          <p class="lede">
+            MarkdownDiff compares and merges Word, ODT, HTML, LaTeX, EPUB — any
+            format <a href="https://pandoc.org" target="_blank" rel="noopener">pandoc</a>
+            reads — by normalizing each one to clean Markdown. No binary noise, no
+            format drama. Just the words that changed.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#get">Get started</a>
+            <a class="btn btn-ghost" href="https://github.com/oxgenet/MarkdownDiff" target="_blank" rel="noopener">View source</a>
+          </div>
+          <code class="install">$ npm i -g markdowndiff</code>
+        </div>
+
+        <!-- Animated diff demo (the "video") -->
+        <div class="hero-demo" data-reveal>
+          <div class="window">
+            <div class="win-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="win-title" id="demo-title">report.docx → report.md</span>
+            </div>
+            <div class="win-body diff" id="hero-diff" aria-hidden="true"></div>
+          </div>
+          <div class="demo-caption">live · unified view · word-level highlights</div>
+        </div>
+      </section>
+
+      <!-- FORMAT MARQUEE -->
+      <section class="marquee" aria-label="Supported formats">
+        <div class="marquee-track" id="marquee"></div>
+      </section>
+
+      <!-- FEATURES -->
+      <section id="features" class="features">
+        <div class="feature" data-reveal>
+          <div class="feature-text">
+            <p class="eyebrow">/* semantic, not binary */</p>
+            <h2>Diffs of meaning, not markup.</h2>
+            <p>
+              Two <code>.docx</code> files are just zipped XML — <code>git diff</code>
+              shows you nothing useful. MarkdownDiff converts both to normalized
+              Markdown first, so you see the sentence that changed, the clause that
+              moved, the number that got edited. Even across <em>different</em> formats.
+            </p>
+            <ul class="ticks">
+              <li>Unified &amp; side-by-side views</li>
+              <li>Word-level highlighting</li>
+              <li>Ignores cosmetic typography (smart quotes, wrapping)</li>
+              <li><code>diff</code>-style exit codes for CI</li>
+            </ul>
+          </div>
+          <div class="feature-visual">
+            <div class="window">
+              <div class="win-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                <span class="win-title">contract-v1.docx ⟷ contract-v2.docx</span></div>
+              <div class="win-body diff static-diff">
+                <div class="row ctx"><span class="tx"># Agreement</span></div>
+                <div class="row del"><span class="tx">Party A agrees to pay <mark class="wd-del">$100</mark>.</span></div>
+                <div class="row add"><span class="tx">Party A agrees to pay <mark class="wd-add">$150</mark>.</span></div>
+                <div class="row ctx"><span class="tx"></span></div>
+                <div class="row del"><span class="tx">Term: <mark class="wd-del">12</mark> months.</span></div>
+                <div class="row add"><span class="tx">Term: <mark class="wd-add">24</mark> months.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature reverse" data-reveal>
+          <div class="feature-text">
+            <p class="eyebrow">/* light or dark, your call */</p>
+            <h2>Beautiful in any theme.</h2>
+            <p>
+              A local web GUI with drag-and-drop, and a CLI that themes itself to your
+              terminal. Light, dark, high-contrast — every color editable down to the
+              hex, from a config file or a <code>--theme-file</code>.
+            </p>
+            <div class="chips">
+              <span class="chip">dark</span><span class="chip">light</span>
+              <span class="chip">high-contrast</span><span class="chip">mono</span>
+              <span class="chip">auto</span>
+            </div>
+          </div>
+          <div class="feature-visual shots">
+            <figure class="shot"><img src="assets/app-light.png" alt="MarkdownDiff GUI, light theme" loading="lazy" /><figcaption>Light</figcaption></figure>
+            <figure class="shot shot-dark"><img src="assets/app-dark.png" alt="MarkdownDiff GUI, dark theme" loading="lazy" /><figcaption>Dark</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- MERGE -->
+      <section id="merge" class="merge-sec" data-reveal>
+        <div class="section-head">
+          <p class="eyebrow">/* three-way merge */</p>
+          <h2>Reconcile two people's edits.</h2>
+          <p class="sub">Give it a common ancestor and two versions. Non-overlapping
+            changes merge themselves; real conflicts are shown side by side.</p>
+        </div>
+        <div class="window wide">
+          <div class="win-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="win-title">ours.md &nbsp;∣&nbsp; base.md &nbsp;∣&nbsp; theirs.md</span></div>
+          <div class="panels" id="merge-demo"></div>
+        </div>
+      </section>
+
+      <!-- FORMATS -->
+      <section id="formats" class="formats" data-reveal>
+        <div class="section-head">
+          <p class="eyebrow">/* everything pandoc reads */</p>
+          <h2>One tool. Every format.</h2>
+          <p class="sub">If pandoc can read it, MarkdownDiff can diff it.</p>
+        </div>
+        <div class="format-grid" id="format-grid"></div>
+      </section>
+
+      <!-- GET IT -->
+      <section id="get" class="get" data-reveal>
+        <div class="section-head">
+          <p class="eyebrow">/* two ways in */</p>
+          <h2>Install in one line.</h2>
+          <p class="sub">Needs <a href="https://pandoc.org/installing.html" target="_blank" rel="noopener">pandoc</a> and Node 18+.</p>
+        </div>
+        <div class="get-grid">
+          <div class="get-card">
+            <h3>⌨ terminal · CLI</h3>
+            <pre class="code"><span class="c-cmd">npm i -g markdowndiff</span>
+
+<span class="c-dim"># compare two documents</span>
+markdowndiff old.docx new.docx
+
+<span class="c-dim"># side-by-side, light theme</span>
+markdowndiff <span class="c-flag">-s --theme light</span> a.md b.md
+
+<span class="c-dim"># three-way merge</span>
+markdowndiff <span class="c-flag">--base</span> orig.md mine.md yours.md</pre>
+          </div>
+          <div class="get-card">
+            <h3>🖥 browser · GUI</h3>
+            <pre class="code"><span class="c-cmd">markdowndiff-gui</span>
+
+<span class="c-dim"># opens http://localhost:4173</span>
+<span class="c-dim"># drag &amp; drop · compare · merge</span>
+<span class="c-dim"># light / dark · copy &amp; download</span>
+<span class="c-dim"># 100% local — files never leave</span>
+<span class="c-dim"># your machine</span></pre>
+            <a class="btn btn-primary full" href="https://github.com/oxgenet/MarkdownDiff" target="_blank" rel="noopener">Read the docs →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="wordmark" href="#top"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3"/><path d="M16 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M12 5v14" stroke-dasharray="2 2.5"/></svg><span>markdown<b>diff</b></span></a>
+          <p class="muted">Diff &amp; merge any document, as clean Markdown.</p>
+          <a class="bmc" href="#" id="bmc" target="_blank" rel="noopener" hidden><span>☕</span> Buy me a coffee</a>
+        </div>
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#merge">Three-way merge</a>
+          <a href="#formats">Formats</a>
+          <a href="#get">Install</a>
+        </div>
+        <div class="foot-col">
+          <h4>Project</h4>
+          <a href="https://github.com/oxgenet/MarkdownDiff" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/oxgenet/MarkdownDiff/issues" target="_blank" rel="noopener">Issues</a>
+          <a href="https://github.com/oxgenet/MarkdownDiff#readme" target="_blank" rel="noopener">Docs</a>
+        </div>
+        <div class="foot-col">
+          <h4>Built on</h4>
+          <a href="https://pandoc.org" target="_blank" rel="noopener">pandoc</a>
+          <a href="https://nodejs.org" target="_blank" rel="noopener">Node.js</a>
+        </div>
+      </div>
+      <div class="foot-base">
+        <span class="muted">© <span id="year"></span> MarkdownDiff · MIT licensed</span>
+        <span class="muted prov">provisional preview · <b>md.oxge.net</b></span>
+      </div>
+    </footer>
+
+    <!-- Optional: set a Buy Me a Coffee URL to reveal the footer support button.
+         Mirrors the app's opt-in behaviour (hidden unless configured, HTTPS only). -->
+    <script>
+      // window.MDD_SUPPORT_URL = "https://www.buymeacoffee.com/<account>";
+    </script>
+    <script src="js/site.js"></script>
+  </body>
+</html>
